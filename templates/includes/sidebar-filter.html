@@ -1,0 +1,21 @@
+{% load movie_list %}
+
+<h5>Categories</h5>
+<ul>
+  {% category_list as categories %}
+  {% for category in categories %}
+    <li><a href="?category={{category.id}}">{{ category.name }}</a></li>
+    <ul>
+      {% for subcategory in category.subcategory.all %}
+        <li><a href="?subcategory={{subcategory.id}}">{{ subcategory.name }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</ul>
+<h5>Movie Types</h5>
+<ul>
+  {% movie_type_list as movie_types %}
+  {% for movie_type in movie_types %}
+    <li><a href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a></li>
+  {% endfor %}
+</ul>

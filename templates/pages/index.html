@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %}
+{% load movie_list %}
+
+{% block content %}
+
+<div class="row mt-5">
+  <div class="col-lg-2">
+    {% include 'includes/sidebar-filter.html' %}
+  </div>
+  <div class="col-lg-10">
+    {% movie_type_list as movie_types %}
+    {% for movie_type in movie_types %}
+      <h5 class="mb-3">{{ movie_type.name }}</h5>
+      <div class="row">
+        {% for movie in request|type_wise_movie:movie_type.id %}
+          <div class="col-lg-4 mb-4">
+            <a target="_blank" href="{{ movie.movie_url }}">
+              <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3" alt="">
+            </a>
+            <h6>Name : {{ movie.name }}</h6>
+            <span class="d-block">Actors : 
+              {% for actor in movie.actors.all %}
+                <b><a href="#">{{ actor.name }}</a>, </b>
+              {% endfor %} 
+            </span>
+            <span class="d-block">Directors : 
+              {% for director in movie.directors.all %}
+                <b><a href="#">{{ director.name }}</a>, </b>
+              {% endfor %} 
+            </span>
+            <span class="d-block">Categories : 
+              {% for category in movie.categories.all %}
+                <b><a href="?category={{category.id}}">{{ category.name }}</a>, </b>
+              {% endfor %} 
+            </span>
+          </div>
+        {% endfor %}
+        {% if request|type_wise_movie:movie_type.id|length == 6 %}
+          <div class="mb-5">
+            <a href="{% url 'type_wise_movie' movie_type.slug %}">Show more</a>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
