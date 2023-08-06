@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
@@ -20,6 +21,16 @@ class Person(BaseModel):
     name = models.CharField(max_length=255)
     avatar = models.ImageField(upload_to='avatar')
     gender = models.CharField(max_length=10, choices=GenderChoices.choices)
+    dob = models.DateField(blank=True, null=True)
+    about = models.TextField(blank=True, null=True)
+
+    @property
+    def age(self):
+        if not self.dob:
+            return None
+
+        today = date.today()
+        return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
 
 
 class Actor(Person):

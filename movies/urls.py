@@ -5,5 +5,6 @@ from django.urls import path
 urlpatterns = [
     path('', views.home_view, name='index'),
     path('movie-type/<slug:slug>/',
-         views.type_wise_movie_view, name='type_wise_movie')
+         views.type_wise_movie_view, name='type_wise_movie'),
+    path('actor/<int:actor_id>/', views.actor_details, name='actor_details')
 ]

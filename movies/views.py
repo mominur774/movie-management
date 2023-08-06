@@ -1,5 +1,4 @@
-from typing import Any, Dict
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from movies.models import *
 from django.views.generic import ListView, View
 from movies.utils import movie_filter
@@ -21,3 +20,18 @@ def type_wise_movie_view(request, slug):
         'movie_type': movie_type
     }
     return render(request, 'pages/type-wise-movies.html', context)
+
+
+def actor_details(request, actor_id):
+    role = request.GET.get('role')
+    if role == 'actor':
+        actor = get_object_or_404(Actor, id=actor_id)
+    elif role == 'director':
+        actor = get_object_or_404(Director, id=actor_id)
+    else:
+        print("Invalid role")
+
+    context = {
+        'actor': actor
+    }
+    return render(request, 'pages/actor-details.html', context)
