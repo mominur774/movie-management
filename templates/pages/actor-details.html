@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="row mt-3 profile">
+  <div class="col-lg-8 mx-auto shadow-sm p-5">
+    <img src="{{ actor.avatar.url }}" class="avatar mb-4" alt="">
+    <h4 class="mb-3">Name : {{ actor.name }}</h4>
+    <span class="d-block mb-3"><b>Gender</b>: {{ actor.gender }}</span>
+    <span class="d-block mb-3"><b>Role</b>: {{ actor.role }}</span>
+    <span class="d-block mb-3"><b>Age</b>: {{ actor.age }}</span>
+    <span class="d-block mb-3">{{ actor.about }}</span>
+  </div>
+</div>
+
+{% endblock content %}
