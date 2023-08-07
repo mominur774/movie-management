@@ -8,8 +8,18 @@
     <h4 class="mb-3">Name : {{ actor.name }}</h4>
     <span class="d-block mb-3"><b>Gender</b>: {{ actor.gender }}</span>
     <span class="d-block mb-3"><b>Role</b>: {{ actor.role }}</span>
+    {% if actor.age %}
     <span class="d-block mb-3"><b>Age</b>: {{ actor.age }}</span>
+    {% endif %}
+    <span class="d-block mb-3">
+      <b>Movies</b>: 
+      {% for movie in actor.movie_set.all %}
+        <a target="_blank" href="{{ movie.movie_url }}">{{ movie.name }}, </a>
+      {% endfor %}
+    </span>
+    {% if actor.about %}
     <span class="d-block mb-3">{{ actor.about }}</span>
+    {% endif %}
   </div>
 </div>
 

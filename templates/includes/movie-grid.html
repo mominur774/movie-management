@@ -1,7 +1,7 @@
 {% for movie in movies %}
-  <div class="col-lg-4 mb-4">
+  <div class="col-lg-4 mb-4 movie">
     <a target="_blank" href="{{ movie.movie_url }}">
-      <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3" alt="">
+      <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3 thumbnail" alt="">
     </a>
     <h6>Name : {{ movie.name }}</h6>
     <span class="d-block">Actors : 
