@@ -4,3 +4,8 @@
   border-radius: 10%;
   object-fit: cover;
 }
+
+.movie .thumbnail {
+  height: 200px;
+  object-fit: cover;
+}
