@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="row mt-5">
+  <div class="col-lg-8 mx-auto shadow-sm py-5 px-3">
+    <h4 class="text-center mb-4">Login</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="row"> 
+        <div class="col-lg-8 mx-auto">
+
+          {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+              <span class="text-danger d-block my-3">{{ error }}</span>
+            {% endfor %}
+          {% endif %}
+
+          {% for field in form %}
+            <div class="form-group mb-3">
+              <label for="" class="form-label">{{ field.label }}</label>
+              {{field}}
+            </div>
+          {% endfor %}
+          <button class="btn btn-primary mb-3" type="submit">Login</button>
+          <span class="d-block">Don't have an account? <a href="{% url 'register' %}">Register</a></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

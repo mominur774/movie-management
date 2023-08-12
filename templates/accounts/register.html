@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<div class="row mt-5">
+  <div class="col-lg-8 mx-auto shadow-sm py-5 px-3">
+    <h4 class="text-center mb-4">Registration</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="row"> 
+        <div class="col-lg-8 mx-auto">
+          {% for field in form %}
+            <div class="form-group mb-3">
+              <label for="" class="form-label">{{ field.label }}</label>
+              {{field}}
+              <span class="text-danger d-block mt-2">{{ field.errors }}</span>
+            </div>
+          {% endfor %}
+          <button class="btn btn-primary mb-3" type="submit">Register</button>
+          <span class="d-block">Alreay have an account? <a href="{% url 'login' %}">Login</a></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

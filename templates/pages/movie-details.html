@@ -1,0 +1,119 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container movie-details my-5">
+  <div class="row">
+    <div class="col-lg-8 col-md-8">
+      <div class="mb-3">
+        <img class="w-100 object-fit-cover thumbnail" src="{{movie.thumbnail.url}}" alt="">
+      </div>
+      <span class="d-block">{{ movie.description }}</span>
+      <hr>
+      {% for review in reviews %}
+        <div class="d-flex justify-content-between align-items-start mb-4">
+          <div>
+            <div class="d-flex gap-1">
+              <h6>{{ review.user.username }}</h6>
+              <span>-</span>
+              <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
+            </div>
+
+            <span class="d-block">{{ review.message }}</span>
+          </div>
+          <span>{{ review.rating }}/10</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-lg-4 col-md-4">
+      <h6>Name : {{ movie.name }}</h6>
+      <span class="d-block">Actors : 
+        {% for actor in movie.actors.all %}
+          <b><a href="{% url 'actor_details' actor.id %}?role=actor">{{ actor.name }}</a>, </b>
+        {% endfor %} 
+      </span>
+      <span class="d-block">Directors : 
+        {% for director in movie.directors.all %}
+          <b><a href="{% url 'actor_details' director.id %}?role=director">{{ director.name }}</a>, </b>
+        {% endfor %} 
+      </span>
+      <span class="d-block">Categories : 
+        {% for category in movie.categories.all %}
+          <b><a href="?category={{category.id}}">{{ category.name }}</a>, </b>
+        {% endfor %} 
+      </span>
+      <hr>
+      <form id="rating-form" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3" id="rating"></div>
+        <textarea 
+          name="" 
+          class="form-control mb-3" 
+          cols="30" 
+          rows="3"
+          placeholder="Write something"
+          id="message"
+        ></textarea>
+        <button id="ratingSubmit" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+
+<script>
+
+
+$(document).ready(function() {
+  let submitButton = $('#ratingSubmit');
+  let ratingScore = 1;
+
+  $('#rating').raty({
+    number: 10,
+    starOff: '{% static 'img/star-off.png' %}',
+    starOn: '{% static 'img/star-on.png' %}',
+    starHalf: '{% static 'img/star-half.png' %}',
+    half: true,
+    click:function(score, element, evt) {
+      ratingScore = score; 
+    },
+  });
+
+  $('#rating-form').submit(function (e) {
+    e.preventDefault();
+
+    const dt = {
+      movie_id: "{{movie.id}}",
+      message: $("#message").val(),
+      rating: ratingScore,
+    }
+
+    $.ajax({
+      url: "{% url 'create_review' %}",
+      type: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': "{{csrf_token}}"
+      },
+      data: JSON.stringify(dt),
+      success: function(response) {
+        console.log('Review submitted successfully', response);
+      },
+      error: function(error) {
+          console.error('Error:', error);
+      }
+    })
+
+  })
+
+})
+
+</script>
+
+{% endblock extra_js %}
