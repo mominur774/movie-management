@@ -3,8 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from autoslug import AutoSlugField
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from enum_helper import GenderChoices, ActorRoleChoices, DirectorRoleChoices, MovieTypeChoices
+from users.models import User
 
 # Create your models here.
 
@@ -89,6 +91,27 @@ class Movie(BaseModel):
         MovieType,
         on_delete=models.PROTECT
     )
+    description = models.TextField()
 
     def __str__(self):
         return self.name
+
+
+class Review(BaseModel):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE
+    )
+    rating = models.DecimalField(
+        max_digits=4,
+        decimal_places=2,
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(1)
+        ]
+    )
+    message = models.TextField(max_length=255, null=True, blank=True)

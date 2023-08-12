@@ -1,5 +1,5 @@
 from django.contrib import admin
-from movies.models import Actor, Director, Category, SubCategory, Movie, MovieType
+from movies.models import Actor, Director, Category, SubCategory, Movie, MovieType, Review
 
 # Register your models here.
 
@@ -32,3 +32,8 @@ class MovieAdmin(admin.ModelAdmin):
 @admin.register(MovieType)
 class MovieTypeAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "slug",)
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("id", "rating", "movie", "user", )
