@@ -1,5 +1,3 @@
-{% load movie_list %}
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'index' %}">MovieWeb</a>
@@ -16,7 +14,6 @@
             Movie Type
           </a>
           <ul class="dropdown-menu">
-            {% movie_type_list as movie_types %}
             {% for movie_type in movie_types %}
               <li>
                 <a class="dropdown-item" href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a>

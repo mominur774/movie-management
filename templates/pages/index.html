@@ -8,7 +8,6 @@
     {% include 'includes/sidebar-filter.html' %}
   </div>
   <div class="col-lg-10">
-    {% movie_type_list as movie_types %}
     {% for movie_type in movie_types %}
       <h5 class="mb-3">{{ movie_type.name }}</h5>
       <div class="row">
