@@ -14,13 +14,3 @@ def type_wise_movie(request, movie_type):
     )[:6].annotate(
         avg_rating=Avg('review__rating')
     )
-
-
-@register.simple_tag
-def category_list():
-    return Category.objects.all().prefetch_related('subcategory')
-
-
-@register.simple_tag
-def movie_type_list():
-    return MovieType.objects.all()
