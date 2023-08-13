@@ -43,6 +43,7 @@
           <b><a href="?category={{category.id}}">{{ category.name }}</a>, </b>
         {% endfor %} 
       </span>
+      {% if request.user.is_authenticated %}
       <hr>
       <form id="rating-form" method="post">
         {% csrf_token %}
@@ -58,6 +59,7 @@
         ></textarea>
         <button id="ratingSubmit" class="btn btn-primary" type="submit">Submit</button>
       </form>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -104,6 +106,7 @@ $(document).ready(function() {
       data: JSON.stringify(dt),
       success: function(response) {
         console.log('Review submitted successfully', response);
+        location.reload();
       },
       error: function(error) {
           console.error('Error:', error);

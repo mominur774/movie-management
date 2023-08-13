@@ -23,3 +23,7 @@ class RegistrationView(CreateView):
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
+
+
+def profile(request):
+    return render(request, 'accounts/profile.html')
