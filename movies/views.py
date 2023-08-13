@@ -4,7 +4,7 @@ from movies.models import *
 from django.views.generic import ListView, View, DetailView
 from movies.utils import movie_filter
 from django.http import JsonResponse, HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 
 # Create your views here.
@@ -57,6 +57,7 @@ class MovieDetailsView(DetailView):
         return context
 
 
+@login_required(login_url='/accounts/login')
 def create_review(request):
     if request.method == 'POST':
         data = json.loads(request.body)
