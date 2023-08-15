@@ -1,11 +1,15 @@
-{% for movie in movies %}
-  <div class="col-lg-4 mb-4 movie">
-    <a href="{% url 'movie_details' movie.slug %}">
-      <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3 thumbnail" alt="">
-    </a>
-    <h6>Name : {{ movie.name }}</h6>
-    <span class="d-block">Rating : 
-      {% if movie.avg_rating %}{{ movie.avg_rating }} {% else %} 0.00 {% endif %}
-    </span>
-  </div>
-{% endfor %}
+{% if movies %}
+  {% for movie in movies %}
+    <div class="col-lg-4 mb-4 movie">
+      <a href="{% url 'movie_details' movie.slug %}">
+        <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3 thumbnail" alt="">
+      </a>
+      <h6>Name : {{ movie.name }}</h6>
+      <span class="d-block">Rating : 
+        {% if movie.avg_rating %}{{ movie.avg_rating }} {% else %} 0.00 {% endif %}
+      </span>
+    </div>
+  {% endfor %}
+{% else %}
+  <span class="d-block mb-3 fw-bold">No movies found</span>
+{% endif %}
