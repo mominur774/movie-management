@@ -10,21 +10,23 @@
         <img class="w-100 object-fit-cover thumbnail" src="{{movie.thumbnail.url}}" alt="">
       </div>
       <span class="d-block">{{ movie.description }}</span>
-      <hr>
-      {% for review in reviews %}
-        <div class="d-flex justify-content-between align-items-start mb-4">
-          <div>
-            <div class="d-flex gap-1">
-              <h6>{{ review.user.username }}</h6>
-              <span>-</span>
-              <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
-            </div>
+      {% if reviews %}
+        <hr>
+        {% for review in reviews %}
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+              <div class="d-flex gap-1">
+                <h6>{{ review.user.username }}</h6>
+                <span>-</span>
+                <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
+              </div>
 
-            <span class="d-block">{{ review.message }}</span>
+              <span class="d-block">{{ review.message }}</span>
+            </div>
+            <span>{{ review.rating }}/10</span>
           </div>
-          <span>{{ review.rating }}/10</span>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
     <div class="col-lg-4 col-md-4">
       <h6>Name : {{ movie.name }}</h6>

@@ -12,7 +12,7 @@
       <h5 class="mb-3">{{ movie_type.name }}</h5>
       <div class="row">
         {% include 'includes/movie-grid.html' with movies=request|type_wise_movie:movie_type.id %}
-        {% if request|type_wise_movie:movie_type.id|length == 6 %}
+        {% if request|type_wise_movie:movie_type.id|length > 6 %}
           <div class="mb-5">
             <a href="{% url 'type_wise_movie' movie_type.slug %}">Show more</a>
           </div>
