@@ -2,3 +2,8 @@ Django
 django-autoslug
 Pillow
 django-environ
+django-hitcount
+psycopg2
+locust
+
+

@@ -1,23 +1,45 @@
-<h5>Categories</h5>
-<ul>
-  {% for category in categories %}
-    <li class="mb-1">
-      <a class="text-decoration-none" href="?category={{category.id}}">{{ category.name }}</a>
-    </li>
-    <ul>
-      {% for subcategory in category.subcategory.all %}
-        <li class="mb-1">
-          <a class="text-decoration-none" href="?subcategory={{subcategory.id}}">{{ subcategory.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endfor %}
-</ul>
-<h5>Types</h5>
-<ul>
-  {% for movie_type in movie_types %}
-    <li class="mb-1">
-      <a class="text-decoration-none" href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a>
-    </li>
-  {% endfor %}
-</ul>
+<style>
+.custom-bg {
+
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.text-light {
+  color: #f1f1f1;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.custom-link:hover {
+  color: #ff4081;
+}
+
+</style>
+
+<div class="custom-bg text-light">
+  <h2>
+Kategoriyalar</h2>
+  <ul>
+    {% for category in categories %}
+      <li class="mb-1">
+        <a class="text-decoration-none text-light custom-link" href="?category={{category.id}}">{{ category.name }}</a>
+      </li>
+      <ul>
+        {% for subcategory in category.subcategory.all %}
+          <li class="mb-1">
+            <a class="text-decoration-none text-light custom-link" href="?subcategory={{subcategory.id}}">{{ subcategory.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </ul>
+  <h2>Janrlar</h2>
+  <ul>
+    {% for movie_type in movie_types %}
+      <li class="mb-1">
+        <a class="text-decoration-none text-light custom-link" href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

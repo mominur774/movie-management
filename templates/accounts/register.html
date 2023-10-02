@@ -7,8 +7,13 @@
     <h4 class="text-center mb-4">Registration</h4>
     <form action="" method="post">
       {% csrf_token %}
-      <div class="row"> 
+      <div class="row">
         <div class="col-lg-8 mx-auto">
+          <div class="form-group mb-3">
+            <a href="#" class="btn btn-primary btn-block">
+              <i class="fab fa-google mr-2"></i> Login with Google
+            </a>
+          </div>
           {% for field in form %}
             <div class="form-group mb-3">
               <label for="" class="form-label">{{ field.label }}</label>
@@ -17,7 +22,7 @@
             </div>
           {% endfor %}
           <button class="btn btn-primary mb-3" type="submit">Register</button>
-          <span class="d-block">Alreay have an account? <a href="{% url 'login' %}">Login</a></span>
+          <span class="d-block text-center">Already have an account? <a href="{% url 'login' %}">Login</a></span>
         </div>
       </div>
     </form>

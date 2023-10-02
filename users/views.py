@@ -6,6 +6,8 @@ from django.views.generic import CreateView
 from users.models import User
 from users.forms import RegistrationForm, LoginForm
 
+
+
 # Create your views here.
 
 

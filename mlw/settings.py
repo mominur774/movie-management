@@ -1,3 +1,4 @@
+
 """
 Django settings for mlw project.
 
@@ -36,7 +37,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -51,6 +52,8 @@ INSTALLED_APPS = [
 
     'movies',
     'users',
+    'hitcount',
+    'mlw'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -96,8 +99,12 @@ WSGI_APPLICATION = 'mlw.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Servers_Anime_movie',
+        'USER': 'postgres',
+        'PASSWORD': '1111',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -138,6 +145,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+STATICFILES_DIR = (str(BASE_DIR.joinpath('static')),)
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
@@ -152,3 +161,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = '/'
+
+

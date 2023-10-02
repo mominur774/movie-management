@@ -1,15 +1,144 @@
-{% if movies %}
-  {% for movie in movies %}
-    <div class="col-lg-4 mb-4 movie">
-      <a href="{% url 'movie_details' movie.slug %}">
-        <img src="{{ movie.thumbnail.url }}" class="w-100 mb-3 thumbnail" alt="">
-      </a>
-      <h6>Name : {{ movie.name }}</h6>
-      <span class="d-block">Rating : 
-        {% if movie.avg_rating %}{{ movie.avg_rating }} {% else %} 0.00 {% endif %}
-      </span>
+    <!doctype html>
+    {% load static %}
+    {% load hitcount_tags%}
+
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Aniclac</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/ea9bd22eef.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/jquery.raty.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      </head>
+<style>
+    .carousel-item {
+    height: 650px;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    border-radius: 10px;  /* Bu yerda siz o'zingizga mos keladigan radiusni tanlashingiz mumkin */
+    overflow: hidden;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+
+.carousel-item:hover img {
+    transform: scale(1.1);  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    box-shadow: 0 0 10px rgb(151, 151, 164);  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 10px #f60202, 0 0 20px #f60202, 0 0 30px #f60202, 0 0 40px #f60202; }
+  100% { text-shadow: 0 0 20px #5ac78c, 0 0 30px #f60202, 0 0 40px #ff0000, 0 0 50px #6ce189, 0 0 60px #ff0000; }
+}
+</style>
+
+      <script>
+         $(document).ready(function(){
+        $('.movie').hover(function(){
+            $(this).find('.thumbnail').css('transform', 'scale(1.1)');
+            $(this).find('.view-btn').css('display', 'block');
+        }, function(){
+            $(this).find('.thumbnail').css('transform', 'scale(1)');
+            $(this).find('.view-btn').css('display', 'none');
+        });
+    });
+
+   </script>
+      <body>
+      <h2 style=" animation: glow 2s infinite; color: #ffffff;">Premyera</h2>
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for movie in movies %}
+
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true" {% endif %}aria-label="Slide {{ forloop.counter }}"></button>
+      {% endfor %}
     </div>
-  {% endfor %}
-{% else %}
-  <span class="d-block mb-3 fw-bold">No movies found</span>
-{% endif %}
+  <div class="carousel-inner">
+    {% for movie in movies %}
+        {% if movie.is_premiere %}
+            <a href="{% url 'movie_details' movie.slug %}">
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ movie.thumbnail.url }}" class="d-block" alt="...">
+                    <div class="carousel-caption d-md-block">
+                       <p style="animation: glow 2s infinite; font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 30px; color: #ff0000; text-shadow: 2px 2px #000000; transition: all 0.3s ease;" onmouseover="this.style.color='#00ff00'; this.style.textShadow='0 0 5px #00ff00';" onmouseout="this.style.color='#ff0000'; this.style.textShadow='2px 2px #000000';">Yangi</p>
+
+
+                        <h4 style="font-family: 'Comic Sans MS', cursive, sans-serif; color: #ff0000;">{{ movie.name }}</h4>
+{#<p style="font-family: 'Comic Sans MS', sans-serif; color: #ffffff;">{{ movie.description }}</p>#}
+
+
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+        {% if movies %}
+         {% for movie in movies %}
+
+
+
+            <div class="col-md-4 col-lg-2 col-4 col-3 col-2 col-1 col-6 col-lg-2 col-md-6 col-sm-6 mb-3 movie">
+
+
+              <a href="{% url 'movie_details' movie.slug %}">
+
+                  <img src="{{ movie.thumbnail.url }}" class="w-100  mb-5 thumbnail " alt="">
+                    <div class="overlay d-flex align-items-center justify-content-center">
+                <button class="btn btn-dark view-btn">Ko'rish <i class="fa fa-play-circle"></i></button>
+              </div>
+              </a>
+
+              <b> {{ movie.name }}</b>
+             <div class="qism"><h7>{{ movie.qism }}</h7></div>
+            <div class="yili" ><b>{{ movie.yili }}</b></div>
+
+
+
+           <div class="hit-count-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+</svg>     <b>{% get_hit_count for movie %}</b>
+</div>
+                  <span class="d-block">Rating : 10
+
+              </span>
+               <b>{{ movie.yoshcheklovi }} </b>
+
+
+
+
+              <!-- Add views count -->
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <span class="d-block mb-3 fw-bold">Bu yerda hech narsa yo'q</span>
+        {% endif %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="{% static 'js/jquery.raty.js' %}"></script>
+        {% block extra_js %}{% endblock extra_js %}
+
+      </body>
+
+    </html>

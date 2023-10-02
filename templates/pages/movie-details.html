@@ -1,60 +1,142 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load hitcount_tags%}
 
 {% block content %}
+
 
 <div class="container movie-details my-5">
   <div class="row">
     <div class="col-lg-8 col-md-8">
-      <div class="mb-3">
-        <img class="w-100 object-fit-cover thumbnail" src="{{movie.thumbnail.url}}" alt="">
-      </div>
-      <span class="d-block">{{ movie.description }}</span>
-      {% if reviews %}
-        <hr>
-        {% for review in reviews %}
-          <div class="d-flex justify-content-between align-items-start mb-4">
-            <div>
-              <div class="d-flex gap-1">
-                <h6>{{ review.user.username }}</h6>
-                <span>-</span>
-                <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
-              </div>
+      <div class="mb-5">
+      <div style="position: relative; padding-bottom: 58.25%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);">
+  <iframe id="responsive-iframe" style="position: absolute; top:0; left: 0; width: 100%; height: 100%;" srcdoc="{{ object.iframe_content }}" class="rounded"></iframe>
+</div>
 
-              <span class="d-block">{{ review.message }}</span>
-            </div>
-            <span>{{ review.rating }}/10</span>
-          </div>
-        {% endfor %}
-      {% endif %}
+
+
+
+      </div>
+
+
+         {% for episode in movie.episode_set.all %}
+
+  <button class="btn btn-primary mb-3" style="background-color: #9797a4; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 12px; transition-duration: 0.4s; overflow: hidden;" onmouseover="this.style.backgroundColor='#f1a7a7'" onmouseout="this.style.backgroundColor='#807d7d'" onclick="location.href='{% url 'movie_episode' movie.slug episode.id %}'">
+    {{ episode.name }}
+</button>
+{% endfor %}
+ <span class="d-block">{{ movie.description }}</span>
+{% if reviews %}
+  <hr>
+  {% for review in reviews %}
+    <div class="review-box d-flex justify-content-between align-items-start mb-4">
+  <div>
+    <div class="d-flex gap-1">
+      <i class="fas fa-user-circle user-icon"></i>
+      <h6>{{ review.user.username }}</h6>
+      <span>-</span>
+      <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
     </div>
+    <span class="d-block">{{ review.message }}</span>
+  </div>
+  <span class="rating">{{ review.rating }}/10</span>
+</div>
+  {% endfor %}
+{% endif %}
+
+
+    </div>
+
     <div class="col-lg-4 col-md-4">
       <h6>Name : {{ movie.name }}</h6>
-      <span class="d-block">Actors : 
+      <span class="d-block">Actors :
         {% for actor in movie.actors.all %}
           <b><a href="{% url 'actor_details' actor.id %}?role=actor">{{ actor.name }}</a>, </b>
-        {% endfor %} 
+        {% endfor %}
       </span>
-      <span class="d-block">Directors : 
+
+      <span class="d-block">Directors :
         {% for director in movie.directors.all %}
           <b><a href="{% url 'actor_details' director.id %}?role=director">{{ director.name }}</a>, </b>
-        {% endfor %} 
+        {% endfor %}
       </span>
-      <span class="d-block">Categories : 
+
+      <span class="d-block">Categories :
         {% for category in movie.categories.all %}
           <b><a href="?category={{category.id}}">{{ category.name }}</a>, </b>
-        {% endfor %} 
+        {% endfor %}
       </span>
+     <span class="d-block">Janr :
+
+          <b><a href="">{{ movie.janr }}</a>, </b>
+
+      </span>
+
+    <span class="d-block">Ishlab Chiquvchi Kompaniya :
+
+          <b>{{ movie.kompaniya }} </b>
+
+      </span>
+    <span class="d-block">Davomiyligi :
+
+          <b>{{ movie.davomiylogi }} </b>
+
+      </span>
+      <span class="d-block">Fasl va Qismlari :
+
+          <b><{{ movie.fasl }} </b>
+
+      </span>
+    <span class="d-block">Tili :
+
+          <b> {{ movie.tili }} </b>
+
+      </span>
+    <span class="d-block">Yili :
+
+          <b>{{ movie.yili }} </b>
+
+      </span>
+    <span class="d-block">Rejesyor :
+
+          <b><a href="">{{ movie.rejesyor }}</a>, </b>
+
+      </span>
+    <span class="d-block">Homiy :
+
+          <b><{{ movie.homiy }} </b>
+
+      </span>
+
+    <span class="d-block">Yosh Cheklovi :
+
+          <b>{{ movie.yoshcheklovi }} </b>
+
+      </span>
+
+     <span class="d-block">Ovoz Berishdi :
+
+          <b><a href="">{{ movie.ovozberishaktorlari }}</a>, </b>
+
+      </span>
+             <div class="hit-count">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+</svg>     <b>{% get_hit_count for movie %}</b></div>
+
+
+
       {% if request.user.is_authenticated %}
       <hr>
       <form id="rating-form" method="post">
         {% csrf_token %}
 
         <div class="mb-3" id="rating"></div>
-        <textarea 
-          name="" 
-          class="form-control mb-3" 
-          cols="30" 
+        <textarea
+          name=""
+          class="form-control mb-3"
+          cols="30"
           rows="3"
           placeholder="Write something"
           id="message"
@@ -62,9 +144,7 @@
         <button id="ratingSubmit" class="btn btn-primary" type="submit">Submit</button>
       </form>
       {% endif %}
-    </div>
-  </div>
-</div>
+
 
 {% endblock content %}
 
@@ -85,7 +165,7 @@ $(document).ready(function() {
     starHalf: '{% static 'img/star-half.png' %}',
     half: true,
     click:function(score, element, evt) {
-      ratingScore = score; 
+      ratingScore = score;
     },
   });
 

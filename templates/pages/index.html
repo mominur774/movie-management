@@ -3,23 +3,76 @@
 
 {% block content %}
 
+
 <div class="row mt-5">
   <div class="col-lg-2">
     {% include 'includes/sidebar-filter.html' %}
   </div>
+
   <div class="col-lg-10">
     {% for movie_type in movie_types %}
       <h5 class="mb-3">{{ movie_type.name }}</h5>
       <div class="row">
         {% include 'includes/movie-grid.html' with movies=request|type_wise_movie:movie_type.id %}
         {% if request|type_wise_movie:movie_type.id|length > 6 %}
+
           <div class="mb-5">
-            <a href="{% url 'type_wise_movie' movie_type.slug %}">Show more</a>
+            <a href="{% url 'type_wise_movie' movie_type.slug %}">Ko'proq ko'rsatish</a>
           </div>
         {% endif %}
       </div>
     {% endfor %}
   </div>
 </div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>Bizga dayberlar kerak bizda ish o'rinlar mavjud</h6>
+            <p class="text-justify"> <i>Batafsil ma'lumot olish uchun Bizga bog'laning</i>  <li><a class="facebook" href="https://t.me/coster444">admin 1<i class="fa fa-telegram"></i></a></li>
+                <li><a class="facebook" href="https://t.me/SHADOW_Janoblari">admin 2<i class="fa fa-telegram"></i></a></li></p>
+
+
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Eslatma!!!</h6>
+            <ul class="footer-links">
+                Barcha videolar ularning mualliflariga tegishli, biz faqat ularni qayta dublyaj qilamiz va ushbu materiallar uchun mualliflik huquqiga ega emasmiz. Agar siz muallif bo'lsangiz, elektron pochtamizga yozing, biz sizning so'rovingiz bo'yicha videoni olib tashlaymiz.
+                <a href="#">mywork200509@gmail.com
+</a>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Biz bilan bog'lanish Telegram orqali</h6>
+            <ul class="footer-links">
+                 <li><a class="facebook" href="https://t.me/coster444">admin 1<i class="fa fa-telegram"></i></a></li>
+                <li><a class="facebook" href="https://t.me/SHADOW_Janoblari">admin 2<i class="fa fa-telegram"></i></a></li>
+
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Reklama va hamkorlik bo'yicha bog'laning
+         <a href="#"></a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="https://t.me/AniClass_2023"><i class="fa fa-telegram"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="https://www.linkedin.com/in/nurmuhammad-boboyorov-08750126b/"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
 
 {% endblock content %}
+

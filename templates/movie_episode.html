@@ -1,0 +1,195 @@
+{#<div class="container movie-episode my-5">#}
+{#  <h1>{{ movie.name }}: {{ episode.name }}</h1>#}
+{#  <div style="position: relative; padding-bottom: 58.25%; height: 0; overflow: hidden;">#}
+{#    <iframe style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 2px solid #6c757d;" srcdoc="{{ episode.iframe_content }}" class="rounded"></iframe>#}
+{#  </div>#}
+{#</div>#}
+ {% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container movie-details my-5">
+  <div class="row">
+    <div class="col-lg-8 col-md-8">
+      <div class="mb-5">
+           <b>{{ movie.name }}: {{ episode.name }}</b>
+          <div style="position: relative; padding-bottom: 58.25%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);">
+
+                  <iframe style="position: absolute; top:0; left: 0; width: 100%; height: 100%;" srcdoc="{{ episode.iframe_content }}" class="rounded"></iframe>
+
+</div>
+
+      </div>
+
+{% for episode in movie.episode_set.all %}
+ <button class="btn btn-primary mb-3" style="background-color: #9797a4; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 12px; transition-duration: 0.4s; overflow: hidden;" onmouseover="this.style.backgroundColor='#f1a7a7'" onmouseout="this.style.backgroundColor='#807d7d'" onclick="location.href='{% url 'movie_episode' movie.slug episode.id %}'">
+    {{ episode.name }}
+</button>
+
+{% endfor %}
+     <span class="d-block">{{ movie.description }}</span>
+      {% if reviews %}
+        <hr>
+        {% for review in reviews %}
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+              <div class="d-flex gap-1">
+                <h6>{{ review.user.username }}</h6>
+                <span>-</span>
+                <small class="d-block"><i>{{ review.updated_at|timesince }}</i></small>
+              </div>
+
+
+              <span class="d-block">{{ review.message }}</span>
+            </div>
+            <span>{{ review.rating }}/10</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="col-lg-4 col-md-4">
+      <h6>Name : {{ movie.name }}</h6>
+      <span class="d-block">Actors :
+        {% for actor in movie.actors.all %}
+          <b><a href="{% url 'actor_details' actor.id %}?role=actor">{{ actor.name }}</a>, </b>
+        {% endfor %}
+      </span>
+
+      <span class="d-block">Directors :
+        {% for director in movie.directors.all %}
+          <b><a href="{% url 'actor_details' director.id %}?role=director">{{ director.name }}</a>, </b>
+        {% endfor %}
+      </span>
+
+      <span class="d-block">Categories :
+        {% for category in movie.categories.all %}
+          <b><a href="?category={{category.id}}">{{ category.name }}</a>, </b>
+        {% endfor %}
+      </span>
+     <span class="d-block">Janr :
+
+          <b><a href="">{{ movie.janr }}</a>, </b>
+
+      </span>
+
+    <span class="d-block">Ishlab Chiquvchi Kompaniya :
+
+          <b>{{ movie.kompaniya }} </b>
+
+      </span>
+    <span class="d-block">Davomiyligi :
+
+          <b>{{ movie.davomiylogi }} </b>
+
+      </span>
+    <span class="d-block">Tili :
+
+          <b> {{ movie.tili }} </b>
+
+      </span>
+    <span class="d-block">Yili :
+
+          <b>{{ movie.yili }} </b>
+
+      </span>
+    <span class="d-block">Rejesyor :
+
+          <b><a href="">{{ movie.rejesyor }}</a>, </b>
+
+      </span>
+    <span class="d-block">Homiy :
+
+          <b><{{ movie.homiy }} </b>
+
+      </span>
+
+    <span class="d-block">Yosh Cheklovi :
+
+          <b>{{ movie.yoshcheklovi }} </b>
+
+      </span>
+
+     <span class="d-block">Ovoz Berishdi :
+
+          <b><a href="">{{ movie.ovozberishaktorlari }}</a>, </b>
+
+      </span>
+      {% if request.user.is_authenticated %}
+      <hr>
+      <form id="rating-form" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3" id="rating"></div>
+        <textarea
+          name=""
+          class="form-control mb-3"
+          cols="30"
+          rows="3"
+          placeholder="Write something"
+          id="message"
+        ></textarea>
+        <button id="ratingSubmit" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+
+<script>
+
+
+$(document).ready(function() {
+  let submitButton = $('#ratingSubmit');
+  let ratingScore = 1;
+
+  $('#rating').raty({
+    number: 10,
+    starOff: '{% static 'img/star-off.png' %}',
+    starOn: '{% static 'img/star-on.png' %}',
+    starHalf: '{% static 'img/star-half.png' %}',
+    half: true,
+    click:function(score, element, evt) {
+      ratingScore = score;
+    },
+  });
+
+  $('#rating-form').submit(function (e) {
+    e.preventDefault();
+
+    const dt = {
+      movie_id: "{{movie.id}}",
+      message: $("#message").val(),
+      rating: ratingScore,
+    }
+
+    $.ajax({
+      url: "{% url 'create_review' %}",
+      type: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': "{{csrf_token}}"
+      },
+      data: JSON.stringify(dt),
+      success: function(response) {
+        console.log('Review submitted successfully', response);
+        location.reload();
+      },
+      error: function(error) {
+          console.error('Error:', error);
+      }
+    })
+
+  })
+
+})
+
+</script>
+
+{% endblock extra_js %}

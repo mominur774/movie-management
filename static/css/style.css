@@ -1,21 +1,475 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(12, 12, 12) 35%, rgb(7, 7, 7) 100%);
+  color: #ffffff;
+
+
+}
+@media (min-width: 1200px) {
+  .movie {
+    /* your styles here */
+  }
+}
+#carouselExampleCaptions {
+  max-width: 100%;
+  overflow: hidden;
+
+  margin-top: -6px;
+
+
+}.carousel-inner img {
+  width: auto;
+  height: auto;
+}.carousel-item {
+  height: 670px; /* O'zgartirishingiz mumkin */
+}.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 9px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+
+
+}.carousel-control-prev,.carousel-control-next {
+  width: 8%;
+  height: auto;
+}
+
+@media (max-width: 776px) {.carousel-control-prev,.carousel-control-next {
+    width: auto;
+    height: auto;
+
+
+
+  }
+}
+.dark-mode {
+    background: linear-gradient(90deg, rgb(155, 206, 232) 0%, rgba(126, 126, 126, 0.52) 35%, rgb(117, 178, 208) 100%);
+
+  color: #ffffff;
+}
 
 * {
   font-family: 'Poppins', sans-serif;
+
+}
+
+   nav {
+
+  box-shadow: 0 4px 8px rgba(101, 87, 87, 0.42); /* Shadow effect */
+}
+
+.nav-link {
+  color: white; /* White text color */
+}
+
+.nav-link:hover {
+  color: #fff; /* White text color on hover */
+}
+.movie {
+
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+
+
+  border-radius: 6%;
+  width: 93.5%;
+  height: 68.7%;
+  inset: 0;
+  top: 3px;
+  right: 0px;
+  bottom: 0px;
+  left: 9px;
+  opacity: 0;
+  backdrop-filter: blur(5px);
+
+
+  transition: opacity .3s ease;
+}
+
+.movie:hover .overlay {
+  opacity: 1;
+}
+
+
+.movie:hover .view-btn {
+  display: block;
+
+
+}
+.btn{
+    background-color: rgba(255, 255, 255, 0.31);
+     box-shadow: 0 4px 8px rgba(217, 208, 208, 0.42)
+
+}
+.btn:hover {
+   background-color: rgba(98, 103, 100, 0.31);
+
+  color: #fcfcfc; /* White text on mouse-over */
+  box-shadow: 0 4px 8px rgb(255, 255, 255)
+
+}
+button{
+    box-shadow: 0 4px 8px rgba(217, 208, 208, 0.42)
+}
+
+
+.navbar-toggler-icon {
+  color: white;
+
 }
 
 .profile .avatar {
   width: 150px;
   height: 150px;
-  border-radius: 10%;
+  border-radius: 60%;
   object-fit: cover;
 }
 
 .movie .thumbnail {
-  height: 200px;
+  width: 30px;
   object-fit: cover;
+  border-radius: 6%;
+
+
+}
+.movie .thumbnail {
+
+  width: 30px;
+  height: 300px;
+  transition: transform .2s;
+}
+
+.movie .thumbnail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 9px rgba(0,0,0,.5);
 }
 
 .movie-details .thumbnail {
-  height: 500px;
+  height: 200px;
+}
+
+
+.movie {
+
+
+
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+
+  transition: all 0.2s ease;
+}
+
+.movie:hover {
+  transform: translateY(-5px);
+
+}
+
+.thumbnail {
+    width: 100%;
+    height: 200px;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    object-fit: cover;
+}
+
+.carousel-item {
+    height: 500px;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    border-radius: 20px;  /* Bu yerda siz o'zingizga mos keladigan radiusni tanlashingiz mumkin */
+    overflow: hidden;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+
+/*@media (max-width: 75px) {#carouselExampleCaptions {*/
+/* */
+/*  overflow: hidden;*/
+/*  margin-left: 1cm;*/
+/*  margin-top: -6px;*/
+/*}*/
+/*}*/
+
+/*yangi css footer qismi */
+.site-footer
+{
+ background-color: rgb(12, 12, 12); /* Qora fon bilan yarim shaffoflik */
+  opacity: 70%;
+  padding:45px 0 20px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#737373;
+}
+.site-footer a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#737373
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
+}
+
+
+/*hit count */
+.hit-count {
+
+   width:16%;
+  height: 3.6%;
+  background-color: rgb(80, 77, 77); /* Qora fon bilan yarim shaffoflik */
+
+  left: 10%;
+
+  padding: 4px;
+  border-radius: 6px;
+
+   opacity: 60%;
+
+
+  color: #ffffff;
+
+
+
+
+
+}
+.yili{
+   width:28%;
+  height: 5.6%;
+  background-color: #504d4d;
+  padding: 4px;
+  border-radius: 6px;
+  text-align: center;
+   opacity: 70%;
+
+
+  /*color: #ffffff;*/
+ position: absolute;
+  top: 5%;
+
+  left: 11%;
+
+  /*background-color: rgba(0, 0, 0, 0.5); !* Qora fon bilan yarim shaffoflik *!*/
+  /*color: #fff; !* Oq matn rangi *!*/
+}
+.hit-count-2{
+
+   width:29%;
+  height: 6.6%;
+  background-color: rgb(80, 77, 77); /* Qora fon bilan yarim shaffoflik */
+
+  padding: 4px;
+  border-radius: 6px;
+
+   opacity: 60%;
+
+
+  color: #ffffff;
+
+ position: absolute;
+  top: 62%; /* Rasmning tepasidan yarim oraliqda joylashuv */
+  left:12%;
+  right: 0;
+  text-align: center; /* Matnni markazga joylashtirish */
+  transform: translateY(-50%); /* Y-tekislikda yarim hajmga ko'chirish */
+
+
+
+}
+
+.qism{
+
+  width:80px;
+  height:30px;
+  /*background-color: #504d4d;*/
+  /*padding: 4px;*/
+  border-radius: 6px;
+  /*text-align: center;*/
+  /* opacity: 60%;*/
+
+
+  /*color: #ffffff;*/
+
+ position: absolute;
+  top: 8%; /* Rasmning tepasidan yarim oraliqda joylashuv */
+  left:43%;
+  right: 0;
+  text-align: center; /* Matnni markazga joylashtirish */
+  transform: translateY(-50%); /* Y-tekislikda yarim hajmga ko'chirish */
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.5); /* Qora fon bilan yarim shaffoflik */
+  color: #fff; /* Oq matn rangi */
+
+}
+
+
+
+/*sharh uchn zamonaviy stiil*/
+
+.review-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.review-box .rating {
+  font-weight: bold;
+  color: #007BFF;
+}
+
+.user-icon {
+  margin-right: 5px;
+  color: #007BFF;
 }

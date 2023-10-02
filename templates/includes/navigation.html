@@ -1,51 +1,64 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'index' %}">MovieWeb</a>
+    <a class="navbar-brand text-white" href="{% url 'index' %}" style="font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 30px; text-shadow: 2px 2px #ff0000;">AniClass</a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon">
+        <i class="fa fa-bars"></i>
+      </span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">Home</a>
+          <a class="nav-link text-white" href="{% url 'index' %}">Bosh Sahifa</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Movie Type
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-list"></i> Janrlar
           </a>
           <ul class="dropdown-menu">
             {% for movie_type in movie_types %}
-              <li>
-                <a class="dropdown-item" href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a>
-              </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'type_wise_movie' movie_type.slug %}">{{ movie_type.name }}</a>
+            </li>
             {% endfor %}
           </ul>
+
         </li>
+
+          <button onclick="toggleDarkMode()" class="btn btn-outline-light">
+  <i class="fa fa-moon-o" id="moon-icon"></i>
+  <i class="fa fa-sun-o" id="sun-icon" style="display: none;"></i>
+</button>
       </ul>
+
+
       <form class="d-flex" action="{% url 'index' %}" method="GET">
-        <input 
-          class="form-control me-2" 
-          type="search" 
-          placeholder="Search" 
-          aria-label="Search"
-          name="search"
-        >
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-light" type="submit">Qidiruv</button>
       </form>
+
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
         {% if not request.user.is_authenticated %}
+       {#teligram qushish#}
+
+
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
+
+          <a class="nav-link text-white" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a>
+
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">Register</a>
+          <a class="nav-link text-white" href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Ro'yhatdan O'tish</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          <a class="nav-link text-white" href="{% url 'profile' %}"><i class="fa fa-user"></i> Hisob</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          <a class="nav-link text-white" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Chiqb ketish</a>
         </li>
         {% endif %}
       </ul>

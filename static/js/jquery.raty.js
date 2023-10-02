@@ -8,6 +8,66 @@
  * version: 3.1.1
  *
  */
+    // Korishlar soni
+
+    // dark mode
+
+  // Dark mode ni yoqish/yopish funksiyasi
+function toggleDarkMode() {
+  let body = document.body;
+  let moon = document.getElementById("moon-icon");
+  let sun = document.getElementById("sun-icon");
+  body.classList.toggle("dark-mode");
+  // Holatni localStorage ga saqlash
+  localStorage.setItem('dark-mode', body.classList.contains("dark-mode"));
+  // Ikonlarni o'zgartirish
+  if (body.classList.contains("dark-mode")) {
+    moon.style.display = "none";
+    sun.style.display = "inline-block";
+  } else {
+    moon.style.display = "inline-block";
+    sun.style.display = "none";
+  }
+}
+// Sahifani yuklashda dark mode ni tekshirish
+document.addEventListener("DOMContentLoaded", (event) => {
+  let darkMode = localStorage.getItem('dark-mode');
+  let body = document.body;
+  let moon = document.getElementById("moon-icon");
+  let sun = document.getElementById("sun-icon");
+  if (darkMode === 'true') {
+    body.classList.add("dark-mode");
+    moon.style.display = "none";
+    sun.style.display = "inline-block";
+  } else {
+    body.classList.remove("dark-mode");
+    moon.style.display = "inline-block";
+    sun.style.display = "none";
+  }
+});
+    // rasm ustini o'zgartirish uchun
+
+    // bu side barniki edi
+    $(document).ready(function(){
+    $('.custom-link').hover(function(){
+        $(this).animate({paddingLeft: '+=15px'}, 200);
+    }, function(){
+        $(this).animate({paddingLeft: '-=15px'}, 200);
+    });
+});
+
+
+
+/*!
+ * Raty - A Star Rating Plugin
+ *
+ * The MIT License
+ *
+ * author:  Washington Botelho
+ * github:  wbotelhos/raty
+ * version: 3.1.1
+ *
+ */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
