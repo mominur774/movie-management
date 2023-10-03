@@ -1,6 +1,6 @@
 import json
 
-from celery import shared_task
+
 
 import movies
 from movies.models import *
