@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import environ
 import os
 from pathlib import Path
+from celery import Celery
 
 
 env = environ.Env(
