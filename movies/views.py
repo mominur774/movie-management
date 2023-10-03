@@ -15,11 +15,11 @@ from hitcount.views import HitCountDetailView
 from hitcount.views import get_hitcount_model
 from hitcount.views import HitCountMixin
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-# from .tasks  import slow_func
-#
-# def index(request):
-#     slow_func.delay(123438)
-#     return HttpResponse("Site working !!")
+from .tasks  import slow_func
+
+def index(request):
+    slow_func.delay(123438)
+    return HttpResponse("Site working !!")
 
 
 
