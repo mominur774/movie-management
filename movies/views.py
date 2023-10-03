@@ -15,11 +15,11 @@ from hitcount.views import HitCountDetailView
 from hitcount.views import get_hitcount_model
 from hitcount.views import HitCountMixin
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-from .tasks  import slow_func
+from .tasks import slow_func
 
-def index(request):
-    slow_func.delay(123438)
-    return HttpResponse("Site working !!")
+
+
+
 
 
 
@@ -51,6 +51,7 @@ def movie_episode(request, movie_slug, episode_id):
     return render(request, 'movie_episode.html', {'movie': movie, 'episode': episode})
 
 def home_view(request):
+    slow_func.delay(123438)
 
     return render(request, 'pages/index.html')
 def type_wise_movie_view(request, slug):
