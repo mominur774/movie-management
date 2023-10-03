@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'users',
     'hitcount',
     'mlw'
+
 ]
 
 AUTH_USER_MODEL = 'users.User'
