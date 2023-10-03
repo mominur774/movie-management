@@ -7,5 +7,6 @@ psycopg2
 locust
 dj-database-url
 psycopg2-binary
-gunicorn 
+gunicorn
+celery
 
