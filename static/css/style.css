@@ -473,3 +473,49 @@ button{
   margin-right: 5px;
   color: #007BFF;
 }
+
+
+
+
+/*qatorr yangi  */
+
+   .carousel-item {
+    height: 650px;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    border-radius: 10px;  /* Bu yerda siz o'zingizga mos keladigan radiusni tanlashingiz mumkin */
+    overflow: hidden;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+
+.carousel-item:hover img {
+    transform: scale(1.1);  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+    box-shadow: 0 0 10px rgb(151, 151, 164);  /* Bu yerda siz o'zingizga mos keladigan o'lchamni tanlashingiz mumkin */
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 10px #f60202, 0 0 20px #f60202, 0 0 30px #f60202, 0 0 40px #f60202; }
+  100% { text-shadow: 0 0 20px #5ac78c, 0 0 30px #f60202, 0 0 40px #ff0000, 0 0 50px #6ce189, 0 0 60px #ff0000; }
+}
+
+
+/*site bar*/
+
+.custom-bg {
+
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.text-light {
+  color: #f1f1f1;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.custom-link:hover {
+  color: #ff4081;
+}

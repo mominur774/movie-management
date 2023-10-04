@@ -10,6 +10,16 @@
  */
     // Korishlar soni
 
+ $(document).ready(function(){
+        $('.movie').hover(function(){
+            $(this).find('.thumbnail').css('transform', 'scale(1.1)');
+            $(this).find('.view-btn').css('display', 'block');
+        }, function(){
+            $(this).find('.thumbnail').css('transform', 'scale(1)');
+            $(this).find('.view-btn').css('display', 'none');
+        });
+    });
+
     // dark mode
 
   // Dark mode ni yoqish/yopish funksiyasi
