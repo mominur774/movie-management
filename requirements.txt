@@ -2,3 +2,5 @@ Django
 django-autoslug
 Pillow
 django-environ
+gunicorn
+psycopg2-binary
