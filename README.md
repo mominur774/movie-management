@@ -39,3 +39,8 @@ $ python manage.py runserver
 ```
 
 The server will run http://127.0.0.1:8000/
+
+
+
+https://github.com/mominur774/movie-management/assets/57674321/7a81aab1-4fc9-415a-90c3-a8c47610cffa
+
